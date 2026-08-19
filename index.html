@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>香港六合彩開獎結果</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f9; }
+    .ball { display: inline-block; width: 40px; height: 40px; line-height: 40px; border-radius: 50%; color: #fff; font-weight: bold; margin: 5px; }
+    .red { background-color: #e74c3c; }
+    .blue { background-color: #3498db; }
+    .green { background-color: #2ecc71; }
+  </style>
+</head>
+<body>
+  <h1>香港六合彩 - 最新開獎結果</h1>
+  <p id="draw-info">載入中...</p>
+  <div id="balls-container"></div>
+
+  <script>
+    // 讀取自動更新的 JSON 資料
+    fetch('data.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('draw-info').innerText = `期數: ${data.period} | 開獎日期: ${data.date}`;
+        const container = document.getElementById('balls-container');
+        container.innerHTML = '';
+        data.numbers.forEach(num => {
+          const span = document.createElement('span');
+          span.className = `ball ${num.color}`;
+          span.innerText = num.code;
+          container.appendChild(span);
+        });
+      })
+      .catch(() => { document.getElementById('draw-info').innerText = '暫無最新資料'; });
+  </script>
+</body>
+</html>
