@@ -1,34 +1,10 @@
 {
-  "period": "24/080",
-  "date": "2026-08-18",
+  "period": "最新期數",
+  "date": "開獎日",
   "numbers": [
     {
-      "code": "01",
+      "code": "00",
       "color": "red"
-    },
-    {
-      "code": "12",
-      "color": "red"
-    },
-    {
-      "code": "24",
-      "color": "green"
-    },
-    {
-      "code": "33",
-      "color": "green"
-    },
-    {
-      "code": "41",
-      "color": "blue"
-    },
-    {
-      "code": "48",
-      "color": "blue"
-    },
-    {
-      "code": "特別號: 06",
-      "color": "green"
     }
   ]
 }
