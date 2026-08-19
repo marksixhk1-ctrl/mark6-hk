@@ -1,0 +1,34 @@
+{
+  "period": "24/080",
+  "date": "2026-08-18",
+  "numbers": [
+    {
+      "code": "01",
+      "color": "red"
+    },
+    {
+      "code": "12",
+      "color": "red"
+    },
+    {
+      "code": "24",
+      "color": "green"
+    },
+    {
+      "code": "33",
+      "color": "green"
+    },
+    {
+      "code": "41",
+      "color": "blue"
+    },
+    {
+      "code": "48",
+      "color": "blue"
+    },
+    {
+      "code": "特別號: 06",
+      "color": "green"
+    }
+  ]
+}
