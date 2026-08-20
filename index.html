@@ -6,26 +6,37 @@
   <title>香港六合彩開獎結果</title>
   <style>
     body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f9; }
-    .ball { display: inline-block; width: 40px; height: 40px; line-height: 40px; border-radius: 50%; color: #fff; font-weight: bold; margin: 5px; }
+    .container { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+    .ball { display: inline-block; width: 42px; height: 42px; line-height: 42px; border-radius: 50%; color: #fff; font-weight: bold; font-size: 18px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
     .red { background-color: #e74c3c; }
     .blue { background-color: #3498db; }
     .green { background-color: #2ecc71; }
+    .plus { font-size: 22px; font-weight: bold; color: #666; margin: 0 4px; }
   </style>
 </head>
 <body>
   <h1>香港六合彩 - 最新開獎結果</h1>
   <p id="draw-info">載入中...</p>
-  <div id="balls-container"></div>
+  <div class="container" id="balls-container"></div>
 
   <script>
-    // 讀取自動更新的 JSON 資料
-    fetch('data.json')
+    // 加上時間戳記避免瀏覽器讀取舊快取
+    fetch('data.json?t=' + new Date().getTime())
       .then(res => res.json())
       .then(data => {
         document.getElementById('draw-info').innerText = `期數: ${data.period} | 開獎日期: ${data.date}`;
         const container = document.getElementById('balls-container');
         container.innerHTML = '';
-        data.numbers.forEach(num => {
+        
+        data.numbers.forEach((num, index) => {
+          // 當處理到第 7 個號碼時，前面加上加號 (+) 分隔特別號
+          if (index === 6) {
+            const plus = document.createElement('span');
+            plus.className = 'plus';
+            plus.innerText = '+';
+            container.appendChild(plus);
+          }
+          
           const span = document.createElement('span');
           span.className = `ball ${num.color}`;
           span.innerText = num.code;
