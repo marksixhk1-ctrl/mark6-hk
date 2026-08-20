@@ -2,12 +2,11 @@ import json
 import requests
 
 def get_hkjc_mark6():
-    # 設定標準頭資料
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
     
-    # 預設數據結構
+    # 預設資料
     result = {
         "period": "24/093",
         "date": "2026-08-18",
@@ -18,12 +17,11 @@ def get_hkjc_mark6():
             {"code": "31", "color": "blue"},
             {"code": "42", "color": "green"},
             {"code": "49", "color": "green"},
-            {"code": "特別號: 18", "color": "blue"}
+            {"code": "18", "color": "blue"}
         ]
     }
 
     try:
-        # 嘗試抓取馬會公開 API
         url = "https://bet.hkjc.com/contentserver/jcw/cms/marksix/results/en/last_draw.json"
         res = requests.get(url, headers=headers, timeout=5)
         if res.status_code == 200:
@@ -37,7 +35,7 @@ def get_hkjc_mark6():
             sp = data.get("extraNumber", {})
             if sp and "number" in sp:
                 drawn.append({
-                    "code": f"特別號: {str(sp.get('number')).zfill(2)}",
+                    "code": str(sp.get('number')).zfill(2),
                     "color": str(sp.get("colour", "red")).lower()
                 })
             
@@ -48,13 +46,10 @@ def get_hkjc_mark6():
             }
             print("成功從馬會 API 取得數據！")
     except Exception as e:
-        print(f"網絡請求提示（已啟用備用安全數據）: {e}")
+        print(f"網絡請求提示: {e}")
 
-    # 寫入 data.json
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-        
-    print("data.json 更新完成！")
 
 if __name__ == "__main__":
     get_hkjc_mark6()
