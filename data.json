@@ -1,6 +1,71 @@
 {
-  "period": "",
-  "date": "",
-  "numbers": [],
-  "prizes": []
+  "period": "26/091",
+  "date": "20/08/2026",
+  "numbers": [
+    {
+      "code": "07",
+      "color": "red"
+    },
+    {
+      "code": "09",
+      "color": "blue"
+    },
+    {
+      "code": "10",
+      "color": "blue"
+    },
+    {
+      "code": "15",
+      "color": "blue"
+    },
+    {
+      "code": "24",
+      "color": "red"
+    },
+    {
+      "code": "46",
+      "color": "red"
+    },
+    {
+      "code": "34",
+      "color": "red"
+    }
+  ],
+  "prizes": [
+    {
+      "prize": "頭獎",
+      "winning_units": "0.0",
+      "per_unit": "$0"
+    },
+    {
+      "prize": "二獎",
+      "winning_units": "1.5",
+      "per_unit": "$1,254,320"
+    },
+    {
+      "prize": "三獎",
+      "winning_units": "68.0",
+      "per_unit": "$73,600"
+    },
+    {
+      "prize": "四獎",
+      "winning_units": "142.0",
+      "per_unit": "$9,600"
+    },
+    {
+      "prize": "五獎",
+      "winning_units": "2,840.0",
+      "per_unit": "$640"
+    },
+    {
+      "prize": "六獎",
+      "winning_units": "4,120.0",
+      "per_unit": "$320"
+    },
+    {
+      "prize": "七獎",
+      "winning_units": "52,300.0",
+      "per_unit": "$40"
+    }
+  ]
 }
