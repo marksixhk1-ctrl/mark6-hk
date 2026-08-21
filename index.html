@@ -3,47 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>香港六合彩開獎結果</title>
+  <title>香港六合彩 - 最新開獎與派彩詳情</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f9; }
-    .container { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
-    .ball { display: inline-block; width: 42px; height: 42px; line-height: 42px; border-radius: 50%; color: #fff; font-weight: bold; font-size: 18px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      max-width: 550px;
+      width: 100%;
+      text-align: center;
+    }
+    h1 { font-size: 22px; color: #1a1a1a; margin-bottom: 6px; }
+    .draw-info { color: #666; font-size: 14px; margin-bottom: 20px; }
+    
+    .balls-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .ball {
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
+      border-radius: 50%;
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
     .red { background-color: #e74c3c; }
     .blue { background-color: #3498db; }
     .green { background-color: #2ecc71; }
-    .plus { font-size: 22px; font-weight: bold; color: #666; margin: 0 4px; }
+    .plus { font-size: 20px; font-weight: bold; color: #888; margin: 0 2px; }
+
+    /* 派彩表格樣式 */
+    h2 { font-size: 16px; color: #333; text-align: left; margin-bottom: 12px; border-left: 4px solid #3498db; padding-left: 8px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid #edf2f7;
+    }
+    th {
+      background-color: #f8fafc;
+      color: #475569;
+      font-weight: 600;
+    }
+    tr:hover { background-color: #f8fafc; }
+    .amount { color: #e74c3c; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>香港六合彩 - 最新開獎結果</h1>
-  <p id="draw-info">載入中...</p>
-  <div class="container" id="balls-container"></div>
+
+  <div class="card">
+    <h1>香港六合彩 - 最新開獎結果</h1>
+    <div class="draw-info" id="draw-info">載入中...</div>
+    <div class="balls-container" id="balls-container"></div>
+
+    <h2>派彩詳情</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>獎項</th>
+          <th>中獎注數</th>
+          <th>每注派彩</th>
+        </tr>
+      </thead>
+      <tbody id="prizes-body">
+        <tr><td colspan="3">載入派彩資料中...</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <script>
-    // 加上時間戳記避免瀏覽器讀取舊快取
     fetch('data.json?t=' + new Date().getTime())
       .then(res => res.json())
       .then(data => {
         document.getElementById('draw-info').innerText = `期數: ${data.period} | 開獎日期: ${data.date}`;
+        
+        // 渲染號碼球
         const container = document.getElementById('balls-container');
         container.innerHTML = '';
-        
-        data.numbers.forEach((num, index) => {
-          // 當處理到第 7 個號碼時，前面加上加號 (+) 分隔特別號
+        data.numbers.forEach((item, index) => {
           if (index === 6) {
             const plus = document.createElement('span');
             plus.className = 'plus';
             plus.innerText = '+';
             container.appendChild(plus);
           }
-          
-          const span = document.createElement('span');
-          span.className = `ball ${num.color}`;
-          span.innerText = num.code;
-          container.appendChild(span);
+          const ball = document.createElement('span');
+          ball.className = `ball ${item.color}`;
+          ball.innerText = item.code;
+          container.appendChild(ball);
         });
+
+        // 渲染派彩表格
+        const prizesBody = document.getElementById('prizes-body');
+        prizesBody.innerHTML = '';
+        if (data.prizes && data.prizes.length > 0) {
+          data.prizes.forEach(p => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td><strong>${p.prize}</strong></td>
+              <td>${p.winning_units}</td>
+              <td class="amount">${p.per_unit}</td>
+            `;
+            prizesBody.appendChild(row);
+          });
+        } else {
+          prizesBody.innerHTML = '<tr><td colspan="3">暫無派彩詳情數據</td></tr>';
+        }
       })
-      .catch(() => { document.getElementById('draw-info').innerText = '暫無最新資料'; });
+      .catch(err => {
+        document.getElementById('draw-info').innerText = '數據載入失敗';
+        console.error(err);
+      });
   </script>
+
 </body>
 </html>
