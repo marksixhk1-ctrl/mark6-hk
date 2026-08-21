@@ -30,5 +30,42 @@
       "code": "18",
       "color": "blue"
     }
+  ],
+  "prizes": [
+    {
+      "prize": "頭獎",
+      "winning_units": "1.0",
+      "per_unit": "$8,000,000"
+    },
+    {
+      "prize": "二獎",
+      "winning_units": "2.5",
+      "per_unit": "$38,400"
+    },
+    {
+      "prize": "三獎",
+      "winning_units": "85.0",
+      "per_unit": "$19,200"
+    },
+    {
+      "prize": "四獎",
+      "winning_units": "150.0",
+      "per_unit": "$9,600"
+    },
+    {
+      "prize": "五獎",
+      "winning_units": "3,200.0",
+      "per_unit": "$640"
+    },
+    {
+      "prize": "六獎",
+      "winning_units": "4,500.0",
+      "per_unit": "$320"
+    },
+    {
+      "prize": "七獎",
+      "winning_units": "58,000.0",
+      "per_unit": "$40"
+    }
   ]
 }
